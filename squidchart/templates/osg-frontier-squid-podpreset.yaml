@@ -1,0 +1,11 @@
+apiVersion: settings.k8s.io/v1alpha1
+kind: PodPreset
+metadata:
+  name: {{ template "squidchart.fullname" . }}
+spec:
+  selector:
+    matchLabels:
+      proxy: {{ .Values.Preset.Spec.Proxy }}
+  env:
+   - name: {{ .Values.Preset.Spec.Env.Name }}
+     value: "http://{{ .Values.Service.Name }}:{{ .Values.Service.ServicePort }}"

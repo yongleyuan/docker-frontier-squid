@@ -1,0 +1,51 @@
+
+Service:
+  Name: osg-frontier-squid
+  Replicas: 1
+  Labels:
+    App: osg-frontier-squid
+  ContainerPort: 3128
+  ServicePort: 3128
+  Image: slateci/osg-frontier-squid
+  Spec:
+    Type: NodePort
+
+
+Deployment:
+  Name: proxy-user-deployment
+  Replicas: 1
+  App: proxy-user-deployment
+  # port? #
+  Spec:
+    Proxy: using
+    Image: nicolaka/netshoot
+    Command: [ "/bin/sh", "-c", "--" ]
+    Args: [ "while true; do sleep 30; done;" ]
+
+
+Preset:
+  Name: osg-frontier-squid-configure
+  Spec:
+    Proxy: using
+    Env:
+      Name: http_proxy
+      Value: "http://osg-frontier-squid:3128"
+
+
+SquidConf:
+  # Memory reserved for cache (in MB), used for small files
+  # Per documentation, don't exceed 1/8 of hardware memory
+  CacheMem: 128
+  # Disk reserved for cache (in MB), used for large files
+  # 10 GB by default, documentation encourages increasing if possible
+  CacheSize: 10000
+  # Location on disk to keep cache, must exist and be writable by squid
+  # To use an entire disk as cache, use entry point to disk here
+  CacheDir: /usr/local/squid/var/cache/squid
+  # The file in which the cache log is stored
+  CacheLog: /usr/local/squid/var/logs/cache.log
+
+
+# No reason for api version
+# not usually using nodeport
+# 

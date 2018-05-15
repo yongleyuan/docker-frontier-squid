@@ -2,6 +2,7 @@
 
 if [[ ! -e /etc/squid/squid.conf ]]; then
   echo "Genrating squid.conf..."
+  # replace reference to customize.sh with versioned mount
   /etc/squid/customize.sh < /etc/squid/squid.conf.frontierdefault > /etc/squid/squid.conf
 fi
 
@@ -13,6 +14,7 @@ if [[ -z ${1} ]]; then
     /usr/sbin/squid -N -f /etc/squid/squid.conf -z
   fi
   echo "Starting squid..."
+  # This should be fine to leave, since it is what's generated after the customize script runs
   exec /usr/sbin/squid -f /etc/squid/squid.conf -NYCd 1
 else
   exec "$@"

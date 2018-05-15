@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: {{ .Values.Deployment.Name }}
+  labels:
+    app: {{ .Values.Deployment.App }}
+    release: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.Deployment.Replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.Deployment.App }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.Deployment.App }}
+        proxy: {{ .Values.Deployment.Spec.Proxy }}
+    spec:
+      containers:
+      - name: {{ .Values.Deployment.App }}
+        image: {{ .Values.Deployment.Spec.Image }}
+        command: {{ .Values.Deployment.Spec.Command }}
+        args: {{ .Values.Deployment.Spec.Args }}
