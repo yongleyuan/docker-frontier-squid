@@ -1,0 +1,22 @@
+name: Build and Cache Docker image
+
+on:
+  push:
+    branches: [ master ]
+  repository_dispatch:
+    types:
+      - dispatch-build
+  workflow_dispatch:
+
+jobs:
+  build-cache-image:
+    runs-on: ubuntu-latest
+    if: startsWith(github.repository, 'opensciencegrid/')
+    strategy:
+      fail-fast: False
+      matrix:
+        repo: ['development', 'testing', 'release']
+    steps:
+    - uses: yongleyuan/build-container-action@v1
+      with:
+        repo: ${{ matrix.repo }}
