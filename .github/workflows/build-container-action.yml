@@ -11,7 +11,7 @@ on:
 jobs:
   build-cache-image:
     runs-on: ubuntu-latest
-    if: startsWith(github.repository, 'opensciencegrid/')
+    if: startsWith(github.repository, 'yongleyuan/')
     strategy:
       fail-fast: False
       matrix:
