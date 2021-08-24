@@ -20,3 +20,5 @@ jobs:
     - uses: yongleyuan/build-container-action@v1
       with:
         repo: ${{ matrix.repo }}
+        docker_username: ${{ secrets.DOCKER_USERNAME }}
+        docker_password: ${{ secrets.DOCKER_PASSWORD }}
