@@ -17,6 +17,8 @@ jobs:
       matrix:
         repo: ['development', 'testing', 'release']
     steps:
+    - uses: actions/checkout@v2
+
     - uses: yongleyuan/build-container-action@v1
       with:
         repo: ${{ matrix.repo }}
