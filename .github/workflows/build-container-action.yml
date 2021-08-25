@@ -22,3 +22,4 @@ jobs:
     - uses: yongleyuan/build-container-action@v1
       with:
         repo: ${{ matrix.repo }}
+        tag_list: opensciencegrid/frontier-squid:release, opensciencegrid/frontier-squid:testing
