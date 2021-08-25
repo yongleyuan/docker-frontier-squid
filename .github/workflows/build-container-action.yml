@@ -22,4 +22,4 @@ jobs:
     - uses: yongleyuan/build-container-action@v1
       with:
         repo: ${{ matrix.repo }}
-        tag_list: opensciencegrid/docker-frontier-squid:release, opensciencegrid/docker-frontier-squid:testing
+        tag_list: yongleyuan/docker-frontier-squid:release, yongleyuan/docker-frontier-squid:testing
