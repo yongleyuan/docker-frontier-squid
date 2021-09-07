@@ -22,6 +22,16 @@ jobs:
     - uses: yongleyuan/build-container-action@v1
       with:
         repo: ${{ matrix.repo }}
+        
+  load-cache-image:
+    runs-on: ubuntu-latest
+    if: startsWith(github.repository, 'yongleyuan/')
+    strategy:
+      fail-fast: False
+      matrix:
+        repo: ['development', 'testing', 'release']
+    steps:
+    - uses: actions/checkout@v2
 
     - uses: yongleyuan/load-container-action@v1
       with:
