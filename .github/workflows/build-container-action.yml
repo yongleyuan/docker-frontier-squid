@@ -22,3 +22,7 @@ jobs:
     - uses: yongleyuan/build-container-action@v1
       with:
         repo: ${{ matrix.repo }}
+
+    - uses: yongleyuan/load-container-action@v1
+      with:
+        repo: ${{ matrix.repo }}
