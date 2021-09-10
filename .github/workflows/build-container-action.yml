@@ -27,7 +27,6 @@ jobs:
     runs-on: ubuntu-latest
     if: startsWith(github.repository, 'yongleyuan/')
     strategy:
-      fail-fast: False
       matrix:
         repo: ['development', 'testing', 'release']
     steps:
@@ -36,3 +35,18 @@ jobs:
     - uses: yongleyuan/load-container-action@v1
       with:
         repo: ${{ matrix.repo }}
+  
+  push-image:
+    runs-on: ubuntu-latest
+    if: startsWith(github.repository, 'yongleyuan/')
+    strategy:
+      matrix:
+        repo: ['development', 'testing', 'release']
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: yongleyuan/push-container-action@v1
+        with:
+          repo: ${{ matrix.repo }}
+          docker_username: ${{ secrets.DOCKER_USERNAME }}
+          docker_password: ${{ secrets.DOCKER_PASSWORD }}
