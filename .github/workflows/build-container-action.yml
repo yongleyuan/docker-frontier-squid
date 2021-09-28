@@ -2,7 +2,7 @@ name: Build and Cache Docker image
 
 on:
   push:
-    branches: [ master, SOFTWARE-4730 ]
+    branches: [ master, SOFTWARE-4831 ]
   repository_dispatch:
     types:
       - dispatch-build
